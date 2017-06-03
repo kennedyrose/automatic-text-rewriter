@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Automatic Text Rewriter Documentation</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">&ldquo;Automatic Text Rewriter&rdquo; Documentation by &ldquo;Kennedy Rose&rdquo; v1.1</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;Automatic Text Rewriter&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 4/9/2012<br>
+					By: Kennedy Rose<br>
+					Email: <a href="mailto:kennedy@kennedyrose.com">kennedy@kennedyrose.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing my script. If you want to quickly set up a website, just read the <a href="#quickstart">Quick Start Guide</a>. The rest of this readme is just a bonus for people who are at least mildly familiar with PHP, and <b>not necessary</b> if you just want an "Automatic Text Rewriter" website. If you have any questions that are not answered with this help file, please feel free to email me at <a href="mailto:kennedy@kennedyrose.com">kennedy@kennedyrose.com</a>.</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li><a href="#quickstart">Quick Start Guide</a></li>
+			<li><a href="#phpfunctions">PHP Functions</a></li>
+			<li>
+				<a href="#examples">Examples</a>
+				<ol>
+					<li><a href="#wordsa">Replacing a word with a synonym</a></li>
+					<li><a href="#wordsb">Finding all the synonyms of a word</a></li>
+					<li><a href="#sentencesa">Replacing all words in a sentence with synonyms</a></li>
+					<li><a href="#sentencesab">Finding all synonyms in a sentence</a></li>
+				</ol>
+			</li>
+			<li><a href="#changelog">Changelog</a></li>
+		</ol>
+		
+		<hr>
+		
+		<h3 id="quickstart"><strong>A) Quick Start Guide</strong> - <a href="#toc">top</a></h3>
+		<p><b>Step 1:</b> Create a database and import the contents of "words_db.sql" into that database. (Due to the size of the database, the script cannot do this for you. If you need help, contact your server provider.)</p>
+		<p><b>Step 2:</b> Create a username and password to be associated through that database. (The script cannot do this for you. If you need help, contact your server provider.)</p>
+		<p><b>Step 3:</b> Upload the contents of the /installer/ directory that came with this file to your server.</p>
+		<p><b>Step 4:</b> Point your browser at the "install.php" file. Example: <i>http://www.yoursite.com/install.php</i></p>
+		<p><b>Step 5:</b> Fill out the form located on this page. It should look something like this:</p>
+		<img src="assets/images/install.jpg" /><br /><br />
+		<p><b>Step 6:</b> That's it! Just click the URL on the screen after it is stalled to see your new Text Rewriting website. If you know how to edit HTML, you can edit the template file, "template.html". For more information on learning HTML, visit <a href="http://www.w3schools.com/html/">this tutorial</a>. Wherever you want the Text Rewriter to appear, just copy and paste this line of code:
+		<pre>&lt;!-- text rewriter goes here --&gt;</pre>
+		
+		<hr>
+
+		<h3 id="phpfunctions"><strong>B) PHP Functions</strong> - <a href="#toc">top</a></h3>
+		<p><b>Note:</b> This section, and all sections following, are intended as a bonus for those who understand the basics of PHP, and is not necessary if you just want the core Text Rewriter website. To set up your Text Rewriter website, just follow the five steps of the <a href="#quickstart">Quick Start Guide</a>.</p>
+		<p>First off, to use these functions, you will need to call on the "text-rewriter.php" file. To do this with PHP, just type:</p>
+		<p><pre>require('text-rewriter.php');</pre></p>
+		<p>You must do this on every page that you wish to use the functions on. See the <a href="#examples">examples</a> section for more information.</p>
+		<hr>
+		<p>Our first function is: <pre>synWord("word", random option)</pre></p>
+		<p>With this we are able to find synonyms for a single word. Just replace "word" with the word you wish to find synonyms for.</p>
+		<p>"Random option" should be replaced with either a 0 or a 1. <b>0</b> Turns the random option <b>off</b>. While <b>1</b> turns the random option <b>on</b>. When the random option is turned on (1), the function will only return a single synonym of the word you supplied, randomly chosen from the database. When the random option is turned off (0), the function will return an array of all the synonyms for the word you supplied.</p>
+		<p>Example of how to: <a href="#wordsa">replace a word with a synonym</a>.<br />Example of how to: <a href="#wordsb">find all synonyms of a word</a>.
+		<hr>
+		<p>Our second function is: <pre>synSentence("sentence, random option)</pre></p>
+		<p>With this we are able to find synonyms for all words in an entire sentences. Just replace "sentence" with the sentence you wish to find synonyms for.</p>
+		<p>"Random option" works the same as it did with the previous function. When turned off (set to 0), the function will replace all words with synonyms, chosen at random. when turned on (set to 1), the function will return an array with a sub-array containing the original sentence and synonyms for each word.</p>	
+		
+		<p>Example of how to: <a href="#wordsa">replace all words in a sentence with synonyms</a>.<br />Example of how to: <a href="#wordsb">find all synonyms for an entire sentence</a>.
+
+
+
+		<hr>
+		
+		<h3 id="examples"><strong>C) Examples</strong> - <a href="#toc">top</a></h3>
+		<p>In these sections we will go over various examples of how you will go about using these functions.</p>
+		
+		
+		<hr>
+		<h3 id="wordsa"><strong>1) Replacing a word with a synonym</strong> - <a href="#toc">top</a></h3>
+		
+		<p>Let's say we wanted to find a single synonym for the word "test". The code to do this would be:</p>
+
+<p><pre>require('text-rewriter.php');
+echo synWord("test", 1);</pre></p>
+		
+		<p>This might (because the word is random) display:</p>
+		
+		<p><pre>verify</pre></p>
+		
+		<p>Because "verify" is a synonym of the word "test". It's that easy. You can just use the previous example and replace the word "test" with whatever you like to find a synonym.</p>
+		
+		
+		
+		
+		
+		<hr>
+		<h3 id="wordsb"><strong>2) Finding all the synonyms of a word</strong> - <a href="#toc">top</a></h3>
+		<p>If you would like to find all of the synonyms for the word "test", the code would be:<p>
+<p><pre>require('text-rewriter.php');
+$synonyms = synWord('test', 0);
+foreach ($synonyms as $synonym) {
+	echo $synonym." ";
+}</pre></p>
+		<p>The first two lines of code are the same as in the previous example, except the "1" has been changed to a "0". This turns the random option off. Which means that the function will return an array.</p>
+		<p>Displaying arrays isn't as easy as before, so we will use a "foreach" loop to display each synonym. Explaining how loops work is beyond the scope of this readme. For more information on PHP loops, see the <a href="http://php.net/manual/en/index.php">online PHP manual</a>. The code above would display all of the synonyms for the word "test" seperated by a single space. There are too many to list here, but the results would look something like this:</p>
+
+<p><pre>poll verify assessment prove confirm</pre></p>
+<p>Because all of those words can be synonyms of the word "test".<p>
+		
+		
+		<hr>
+		<h3 id="sentencesa"><strong>3) Replacing all words in a sentence with synonyms</strong> - <a href="#toc">top</a></h3>
+		<p>If you would like to replace all words in a sentence with synonyms (excluding basic words like "the"), you would use this code:
+<p><pre>require('text-rewriter.php');
+echo synSentence('This is a test sentence!', 1);</pre></p>
+		<p>This is similar to the first example of replacing words, but the function is now "synSentence", which is the function for sentences. The random option is turned on (set to 1), because we want to replace all the words with randomly chosen synonyms. So this might (because the words are random) display:</p>
+<p><pre>This is a research pronouncement!</pre></p>
+		<p>The first three words stayed the same, since they are basic words and have no synonyms. The last two words have been replaced with their respective synonyms.</p>
+		
+		<hr>
+		<h3 id="sentencesb"><strong>4) Finding all synonyms in a sentence</strong> - <a href="#toc">top</a></h3>
+		<p>This may get a little more complex if you are not familar with how sub-arrays (arrays within arrays) are structured. Read on if you are familiar.</p>
+		<p>Let's say you wanted to find all of the synonyms for all of the words in the sentence "This is a test sentence!"</p> Your code would start off looking like this:</p>
+<p><pre>require('text-rewriter.php');
+$sentence = synSentence('This is a test sentence!', 0);</pre></p>
+		<p>It looks the same as in the previous example, but with the random option turned off (set to 0). The first value in each array is the original word. Let's say we wanted to display some results:</p>
+<p><pre>require('text-rewriter.php');
+$sentence = synSentence('This is a test sentence!', 0);
+echo $sentence[0][0]." ";
+echo $sentence[1][0]." ";
+echo $sentence[2][0]." ";
+echo $sentence[3][0]." ";
+echo $sentence[4][0];</pre></p>
+		<p>But this would just display the original sentence, since the second value in each variable is [0]. So let's say we wanted to display the original word for the first 3 words ("This is a") and display synonyms for the last two words ("test sentence!"). Your code can look something like this:</p>
+<p><pre>require('text-rewriter.php');
+$sentence = synSentence('This is a test sentence!', 0);
+echo $sentence[0][0]." ";
+echo $sentence[1][0]." ";
+echo $sentence[2][0]." ";
+echo $sentence[3][9]." ";
+echo $sentence[4][8];</pre></p>
+		<p>This would display:</p>
+<p><pre>This is a trial term!</pre></p>
+		<p>Since we kept the second value [0] in the first three words, those words stayed the same. We changed the value for the word "test" to [9], so it chose the ninth synonym. We changed the value for the word "term!" to [8], so it chose the eighth synonym.</p>
+
+
+
+
+		<hr>
+		<h3 id="changelog"><strong>D) Changelog</strong> - <a href="#toc">top</a></h3>
+<p>1.2 : Updated the demo site to find all synonyms.</p>
+<p>1.1 : Suppressed an error that showed up when editing the stopwords array in the "config.php" file.</p>
+		
+		
+		
+		<hr>
+		
+		<p>Thank you for purchasing this script! Remember, if you are not familiar with PHP, stick to the <a href="#quickstart">Quickstart Guide</a>. The rest of the sections of this tutorial are designed for those initiated in PHP. General PHP tutorials are beyond the scope of this readme. If you would like to learn, there are <a href="http://php.net/manual/en/index.php">plenty of wonderful resources out there</a>. If you have questions, feel free to email me at <a href="mailto:kennedy@kennedyrose.com">kennedy@kennedyrose.com</a>. Thanks again!</p> 
+		
+		<p class="append-bottom alt large"><strong>Kennedy Rose</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>
